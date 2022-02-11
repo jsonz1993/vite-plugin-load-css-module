@@ -3,7 +3,7 @@
  * @Date: 2022-02-09 11:21:58
  * @Email: v_gxzhang@tecent.com
  * @LastEditors: Jsonz
- * @LastEditTime: 2022-02-10 17:22:16
+ * @LastEditTime: 2022-02-11 11:07:59
  * @Description: file content
  */
 import * as path from 'path'
@@ -39,7 +39,6 @@ export default function loadCssModuleFile(
     },
 
     async resolveId(id, importer, resolveOpts) {
-      console.log(id)
       if (!defaultResolvePlugin?.resolveId || !include(id)) return null
 
       if (cssModuleMap.has(id)) return id
@@ -69,7 +68,6 @@ export default function loadCssModuleFile(
     },
 
     async load(id) {
-      console.log('load', id)
       if (cssModuleMap.has(id)) {
         const filePath = cssModuleMap.get(id)!
         try {

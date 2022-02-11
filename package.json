@@ -19,7 +19,11 @@
   "files": [
     "dist"
   ],
-  "keywords": [],
+  "keywords": [
+    "vite",
+    "vite-plugin",
+    "css-module"
+  ],
   "license": "ISC",
   "lint-staged": {
     "*": [
@@ -48,9 +52,6 @@
     "url": "https://github.com/jsonz1993/vite-plugin-load-css-module"
   },
   "dependencies": {},
-  "peerDependencies": {
-    "vite": ">=2.x"
-  },
   "devDependencies": {
     "@babel/cli": "7.17.0",
     "@babel/core": "7.17.2",

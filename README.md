@@ -1,6 +1,8 @@
 # vite-plugin-load-css-module
 
-💂‍♂️A plugin to extend vite's css module rules, not just ".module" suffix
+💂‍♂️A plugin to extend vite's css module rules, not just ".module" suffix。
+
+Use the resolveId hook to trick the vite css plugin by returning the filename as '.module.css'.
 
 # Install
 

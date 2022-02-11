@@ -1,11 +1,3 @@
-/*
- * @Author: Jsonz1993
- * @Date: 2022-02-09 11:21:58
- * @Email: v_gxzhang@tecent.com
- * @LastEditors: Jsonz
- * @LastEditTime: 2022-02-11 11:07:59
- * @Description: file content
- */
 import * as path from 'path'
 import { promises as fs } from 'fs'
 import type { Plugin, ResolvedConfig } from 'vite'

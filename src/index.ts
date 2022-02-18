@@ -6,9 +6,24 @@ const queryRE = /\?.*$/s
 const hashRE = /#.*$/s
 const cleanUrl = (url: string): string =>
   url.replace(hashRE, '').replace(queryRE, '')
+
 let resolvedConfig: ResolvedConfig
 let defaultResolvePlugin: Plugin | undefined
-const cssModuleMap = new Map<string, string>()
+type FullModulePath = string
+type FullOriginPath = string
+const cssModuleMap = new Map<FullModulePath, FullOriginPath>()
+const originFileMap = new Map<FullOriginPath, FullOriginPath>()
+
+function getFullPath(id: string): string {
+  return path.join(resolvedConfig.root, id)
+}
+
+function getFilePath(id: string): string | undefined {
+  const fullPath = getFullPath(id)
+  if (cssModuleMap.has(id)) return cssModuleMap.get(id)
+  if (id.startsWith('/') && cssModuleMap.has(fullPath))
+    return cssModuleMap.get(fullPath)
+}
 
 export interface LoadCssModuleFileOptions {
   include: (id: string) => boolean
@@ -33,9 +48,10 @@ export default function loadCssModuleFile(
     async resolveId(id, importer, resolveOpts) {
       if (!defaultResolvePlugin?.resolveId || !include(id)) return null
 
-      if (cssModuleMap.has(id)) return id
+      // 处理 ensureEntryFromUrl 中的路径问题
+      // /a.module.css => /absPath/a.module.css
       if (id.startsWith('/')) {
-        const fullPath = path.join(resolvedConfig.root, id)
+        const fullPath = getFullPath(id)
         if (cssModuleMap.has(fullPath)) return fullPath
       }
 
@@ -43,7 +59,7 @@ export default function loadCssModuleFile(
         this,
         id,
         importer,
-        resolveOpts,
+        resolveOpts || {},
       )
       if (!result) return null
       let resolvedPath: string
@@ -56,12 +72,21 @@ export default function loadCssModuleFile(
         base: `${p.name}.module${p.ext}`,
       })
       cssModuleMap.set(newPath, resolvedPath)
+      originFileMap.set(resolvedPath, newPath)
       return newPath
     },
 
+    handleHotUpdate(hmrContext) {
+      const { file, server } = hmrContext
+      if (!originFileMap.has(file)) return
+      const cssModuleFile = originFileMap.get(file)!
+      const modules = server.moduleGraph.getModulesByFile(cssModuleFile)
+      return [...(modules || [])]
+    },
+
     async load(id) {
-      if (cssModuleMap.has(id)) {
-        const filePath = cssModuleMap.get(id)!
+      const filePath = getFilePath(id)
+      if (filePath) {
         try {
           return await fs.readFile(cleanUrl(filePath), 'utf-8')
         } catch (e) {

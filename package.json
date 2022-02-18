@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-load-css-module",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A plugin to extend vite's css module rules, not just \".module\" suffix",
   "main": "dist/index.js",
   "module": "dist/index.mjs",

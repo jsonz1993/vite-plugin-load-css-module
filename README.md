@@ -30,6 +30,7 @@ export default defineConfig({
 
 # Example
 
-[https://github.com/jsonz1993/vite-plugin-load-css-module/tree/master/playground/css](https://github.com/jsonz1993/vite-plugin-load-css-module/tree/master/playground/css)
+[https://github.com/jsonz1993/vite-plugin-load-css-module/tree/master/playground](https://github.com/jsonz1993/vite-plugin-load-css-module/tree/master/playground)
 
 [Post](https://github.com/jsonz1993/blog/issues/38)
+

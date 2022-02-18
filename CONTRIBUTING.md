@@ -6,6 +6,6 @@
 
 ## 发布版本
 
-1. git tag 'vx.x.x'
+1. npm run major | minor | patch
 2. git push --tags
 3. github action 执行发布

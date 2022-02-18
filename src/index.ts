@@ -4,7 +4,7 @@ import type { Plugin, ResolvedConfig } from 'vite'
 
 const queryRE = /\?.*$/s
 const hashRE = /#.*$/s
-export const cleanUrl = (url: string): string =>
+const cleanUrl = (url: string): string =>
   url.replace(hashRE, '').replace(queryRE, '')
 
 let resolvedConfig: ResolvedConfig
@@ -58,7 +58,7 @@ export default function loadCssModuleFile(
       const result = await defaultResolvePlugin.resolveId.call(
         this,
         id,
-        undefined,
+        importer,
         resolveOpts || {},
       )
       if (!result) return null

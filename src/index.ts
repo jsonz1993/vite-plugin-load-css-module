@@ -46,7 +46,12 @@ export default function loadCssModuleFile(
     },
 
     async resolveId(id, importer, resolveOpts) {
-      if (!defaultResolvePlugin?.resolveId || !include(id)) return null
+      if (!defaultResolvePlugin?.resolveId) return null
+
+      // fix: postcss url(xxx) 问题
+      if (id.startsWith('/') && cssModuleMap.has(getFullPath(id)))
+        return getFullPath(id)
+      if (!include(id)) return null
 
       // 处理 ensureEntryFromUrl 中的路径问题
       // /a.module.css => /absPath/a.module.css
@@ -79,8 +84,19 @@ export default function loadCssModuleFile(
     handleHotUpdate(hmrContext) {
       const { file, server } = hmrContext
       if (!originFileMap.has(file)) return
+      const {
+        config: { root },
+      } = server
       const cssModuleFile = originFileMap.get(file)!
-      const modules = server.moduleGraph.getModulesByFile(cssModuleFile)
+      let modules = server.moduleGraph.getModulesByFile(cssModuleFile)
+
+      // /fs-root/foo -> /foo
+      if (!modules && cssModuleFile.startsWith(root)) {
+        modules = server.moduleGraph.getModulesByFile(
+          cssModuleFile.replace(root, ''),
+        )
+      }
+
       return [...(modules || [])]
     },
 

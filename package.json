@@ -52,6 +52,9 @@
     "url": "https://github.com/jsonz1993/vite-plugin-load-css-module"
   },
   "dependencies": {},
+  "peerDependencies": {
+    "vite": "^2.8.0"
+  },
   "devDependencies": {
     "@babel/cli": "7.17.0",
     "@babel/core": "7.17.2",

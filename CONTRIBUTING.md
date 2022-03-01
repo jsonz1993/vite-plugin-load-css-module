@@ -3,6 +3,7 @@
 1. 修改代码
 2. playground 验证
 3. git commit 'feat:xxx' || npm run commit
+4. 提 PR (desc fix: #xxx)
 
 ## 发布版本
 

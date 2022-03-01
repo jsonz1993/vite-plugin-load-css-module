@@ -1,4 +1,4 @@
-import * as path from 'path'
+import { posix as path } from 'path'
 import { promises as fs } from 'fs'
 import type { Plugin, ResolvedConfig } from 'vite'
 

@@ -12,9 +12,10 @@
     "test": "jest",
     "commit": "cz",
     "format": "prettier --write .",
-    "major": "npm version major",
-    "minor": "npm version minor",
-    "patch": "npm version patch"
+    "release": "standard-version",
+    "major": "standard-version --release-as major",
+    "minor": "standard-version --release-as minor",
+    "patch": "standard-version --release-as patch"
   },
   "files": [
     "dist"
@@ -73,6 +74,7 @@
     "prettier": "2.5.1",
     "rimraf": "^3.0.2",
     "simple-git-hooks": "2.7.0",
+    "standard-version": "^9.3.2",
     "ts-node": "10.5.0",
     "tsup": "5.11.13",
     "typescript": "4.5.5",

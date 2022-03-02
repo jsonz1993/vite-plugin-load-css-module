@@ -9,12 +9,14 @@ import sass from './App-module.scss'
 function App() {
   return (
     <div className="App">
-      <p className={cssM.applyColor}>css.module</p>
-      <p className={css.applyColor}>css module</p>
-      <p className={less.applyColor}>less module</p>
-      <p className={sass.applyColor}>sass module</p>
-      <p className="less">less</p>
-      <p className="sass">sass</p>
+      <p className={cssM.applyColor}>App.module.css: firebrick</p>
+      <p className={css.applyColor}>App-module.css: antiquewhite</p>
+      <p className={less.applyColor}>App-module.less: bisque</p>
+      <p className={sass.applyColor}>App-module.scss: cadetblue</p>
+      <p className={sass.applyBg}>App-module.scss: background-image</p>
+      <p className="less">App.less: darkblue</p>
+      <p className="sass">App.scss: gray</p>
+      <p className="css">App.css: coral</p>
     </div>
   )
 }

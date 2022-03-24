@@ -13,6 +13,7 @@ type FullModulePath = string
 type FullOriginPath = string
 const cssModuleMap = new Map<FullModulePath, FullOriginPath>()
 const originFileMap = new Map<FullOriginPath, FullOriginPath>()
+const watchFiles = new Set<string>()
 
 function getFullPath(id: string): string {
   return path.join(resolvedConfig.root, id)
@@ -78,6 +79,10 @@ export default function loadCssModuleFile(
       })
       cssModuleMap.set(newPath, resolvedPath)
       originFileMap.set(resolvedPath, newPath)
+      if (!watchFiles.has(resolvedPath)) {
+        watchFiles.add(resolvedPath)
+        this.addWatchFile(resolvedPath)
+      }
       return newPath
     },
 

@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.4](https://github.com/jsonz1993/vite-plugin-load-css-module/compare/v0.1.3...v0.1.4) (2022-03-24)
+
+### Bug Fixes
+
+- fix hmr ([#7](https://github.com/jsonz1993/vite-plugin-load-css-module/issues/7)) ([6a87f83](https://github.com/jsonz1993/vite-plugin-load-css-module/commit/6a87f838fe0c24c5b98ae66f6244354964ed2e43))
+
 ### [0.1.3](https://github.com/jsonz1993/vite-plugin-load-css-module/compare/v0.1.2...v0.1.3) (2022-03-01)
 
 ### Bug Fixes
